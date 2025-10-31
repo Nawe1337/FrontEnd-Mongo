@@ -7,6 +7,7 @@ import Productos from './pages/Productos';
 import Carrito from './pages/Carrito';
 import './index.css';
 import PagoExitoso from './pages/PagoExitoso';
+import DebugEnv from './components/DebugEnv';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
       <Router>
         <div className="App">
           <Navbar />
+          <DebugEnv />
           <main className="main-content">
             <Routes>
               <Route path="/" element={<Home />} />
