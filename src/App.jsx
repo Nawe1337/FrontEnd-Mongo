@@ -1,4 +1,4 @@
-import React from 'react';
+
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { CartProvider } from './context/CartContext';
 import Navbar from './components/Navbar';
@@ -6,6 +6,7 @@ import Home from './pages/Home';
 import Productos from './pages/Productos';
 import Carrito from './pages/Carrito';
 import './index.css';
+import PagoExitoso from './pages/PagoExitoso';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
               <Route path="/" element={<Home />} />
               <Route path="/productos" element={<Productos />} />
               <Route path="/carrito" element={<Carrito />} />
+              <Route path="/pago-exitoso" element={<PagoExitoso />} />
               <Route path="*" element={
                 <div className="not-found">
                   <h2>404 - Página No Encontrada</h2>

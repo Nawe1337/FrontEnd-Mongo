@@ -1,9 +1,30 @@
-
+ 
+  import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
+import { stripeService } from '../services/stripeService';
 
 const Carrito = () => {
   const { items, total, itemCount, updateQuantity, removeFromCart, clearCart } = useCart();
+  const [loading, setLoading] = useState(false);
+
+  const handleCheckout = async () => {
+    if (items.length === 0) return;
+
+    setLoading(true);
+    try {
+      const { sessionId, url } = await stripeService.createCheckoutSession(items);
+      
+      // Redirigir a Stripe Checkout
+      window.location.href = url;
+      
+    } catch (error) {
+      console.error('Error al procesar el pago:', error);
+      alert(`Error: ${error.message}`);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   if (items.length === 0) {
     return (
@@ -35,48 +56,10 @@ const Carrito = () => {
       <div className="carrito-items">
         {items.map((item) => (
           <div key={item._id} className="carrito-item">
-            <div className="item-image">
-              <img 
-                src={item.imagen || 'https://via.placeholder.com/80x80/4A5568/FFFFFF?text=Imagen'} 
-                alt={item.nombre}
+            <img
+              src={item.imagen || 'https://via.placeholder.com/80x80/4A5568/FFFFFF?text=Imagen'}
+              alt={item.nombre}
               />
-            </div>
-            
-            <div className="item-info">
-              <h3 className="item-nombre">{item.nombre}</h3>
-              <p className="item-descripcion">{item.descripcion}</p>
-              <span className="item-precio">${item.precio}</span>
-            </div>
-
-            <div className="item-controls">
-              <div className="quantity-controls">
-                <button 
-                  onClick={() => updateQuantity(item._id, item.quantity - 1)}
-                  className="btn-quantity"
-                >
-                  -
-                </button>
-                <span className="quantity">{item.quantity}</span>
-                <button 
-                  onClick={() => updateQuantity(item._id, item.quantity + 1)}
-                  className="btn-quantity"
-                  disabled={item.quantity >= item.stock}
-                >
-                  +
-                </button>
-              </div>
-              
-              <div className="item-subtotal">
-                ${(item.precio * item.quantity).toFixed(2)}
-              </div>
-              
-              <button 
-                onClick={() => removeFromCart(item._id)}
-                className="btn-eliminar"
-              >
-                🗑️
-              </button>
-            </div>
           </div>
         ))}
       </div>
@@ -84,14 +67,30 @@ const Carrito = () => {
       <div className="carrito-summary">
         <div className="summary-total">
           <h3>Total: ${total.toFixed(2)}</h3>
+          <p className="shipping-note">✅ Envío gratis en compras mayores a $50</p>
         </div>
         <div className="summary-actions">
           <Link to="/productos" className="btn-seguir-comprando">
             ← Seguir Comprando
           </Link>
-          <button className="btn-finalizar-compra">
-            🛒 Finalizar Compra
+          <button 
+            onClick={handleCheckout}
+            disabled={loading}
+            className="btn-finalizar-compra"
+          >
+            {loading ? 'Procesando...' : '🛒 Proceder al Pago'}
           </button>
+        </div>
+        
+        {/* Información de tarjetas de prueba */}
+        <div className="test-cards-info">
+          <h4>💳 Tarjetas de Prueba Stripe:</h4>
+          <div className="test-cards">
+            <p><strong>Visa:</strong> 4242 4242 4242 4242</p>
+            <p><strong>MM/AA:</strong> Cualquier fecha futura</p>
+            <p><strong>CVC:</strong> Cualquier 3 dígitos</p>
+            <p><strong>Código Postal:</strong> Cualquier 5 dígitos</p>
+          </div>
         </div>
       </div>
     </div>

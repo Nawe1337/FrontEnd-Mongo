@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-// Con el proxy configurado en vite.config.js, podemos usar rutas relativas
-const API_BASE_URL = '/api';
+// URL base de la API desde variables de entorno
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || '/api';
 
 const api = axios.create({
   baseURL: API_BASE_URL,
@@ -21,19 +21,10 @@ api.interceptors.response.use(
 );
 
 export const productosAPI = {
-  // Obtener todos los productos
   getAll: () => api.get('/productos'),
-  
-  // Obtener producto por ID
   getById: (id) => api.get(`/productos/${id}`),
-  
-  // Crear nuevo producto
   create: (productoData) => api.post('/productos', productoData),
-  
-  // Actualizar producto
   update: (id, productoData) => api.put(`/productos/${id}`, productoData),
-  
-  // Eliminar producto
   delete: (id) => api.delete(`/productos/${id}`),
 };
 
