@@ -1,16 +1,23 @@
+import { useNavigate } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
 
 const ProductoCard = ({ producto }) => {
   const { addToCart } = useCart();
+  const navigate = useNavigate(); // ← Agregar este hook
 
-  const handleAddToCart = () => {
+  const handleAddToCart = (e) => {
+    e.stopPropagation(); // ← Prevenir que el click se propague al contenedor principal
     addToCart(producto);
-    // Opcional: mostrar notificación
     alert(`¡${producto.nombre} añadido al carrito!`);
   };
 
+  const handleCardClick = () => {
+    console.log('🖱️ Clicked product ID:', producto._id); // Debug
+    navigate(`/producto/${producto._id}`); // ← Navegar al detalle del producto
+  };
+
   return (
-    <div className="producto-card">
+    <div className="producto-card" onClick={handleCardClick} style={{ cursor: 'pointer' }}>
       <div className="producto-image">
         <img 
           src={producto.imagen || '/placeholder-image.jpg'} 
