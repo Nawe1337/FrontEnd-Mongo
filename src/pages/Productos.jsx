@@ -45,10 +45,10 @@ const Productos = () => {
   return (
     <div className="productos-page">
       <div className="page-header">
-        <h1>Nuestros Productos</h1>
-        <p>Encuentra lo último en tecnología</p>
+        {/* <h1>Nuestros Productos</h1>
+        <p>Encuentra lo último en tecnología</p> */}
         <div className="productos-stats">
-          <span>{productos.length} productos encontrados</span>
+          {/* <span>{productos.length} productos encontrados</span> */}
         </div>
       </div>
 

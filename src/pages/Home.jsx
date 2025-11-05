@@ -2,37 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const Home = () => {
-  // Productos destacados ficticios
-  const featuredProducts = [
-    {
-      id: 1,
-      name: "iPhone 15 Pro",
-      price: 999,
-      image: "https://images.unsplash.com/photo-1592750475338-74b7b21085ab?w=300&h=300&fit=crop",
-      category: "Smartphones"
-    },
-    {
-      id: 2,
-      name: "MacBook Air M2",
-      price: 1199,
-      image: "https://images.unsplash.com/photo-1541807084-5c52b6b3adef?w=300&h=300&fit=crop",
-      category: "Laptops"
-    },
-    {
-      id: 3,
-      name: "Samsung Galaxy Watch",
-      price: 299,
-      image: "https://images.unsplash.com/photo-1579586337278-3fbd9e1a37b8?w=300&h=300&fit=crop",
-      category: "Wearables"
-    },
-    {
-      id: 4,
-      name: "Sony WH-1000XM4",
-      price: 349,
-      image: "https://images.unsplash.com/photo-1583394838336-acd977736f90?w=300&h=300&fit=crop",
-      category: "Audio"
-    }
-  ];
 
   // Estadísticas falsas
   const stats = [
@@ -58,9 +27,9 @@ const Home = () => {
             <Link to="/productos" className="btn-primary">
               🛒 Comprar Ahora
             </Link>
-            <Link to="/ofertas" className="btn-secondary">
+            {/* <Link to="/ofertas" className="btn-secondary">
               💰 Ver Ofertas
-            </Link>
+            </Link> */}
           </div>
           <div className="hero-features">
             <span>🚚 Envío Gratis</span>
@@ -88,7 +57,7 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Productos Destacados */}
+      {/* Productos Destacados
       <section className="featured-products">
         <div className="section-header">
           <h2>🔥 Productos Destacados</h2>
@@ -116,7 +85,7 @@ const Home = () => {
             Ver Todos los Productos →
           </Link>
         </div>
-      </section>
+      </section> */}
 
       {/* Features Section */}
       <section className="features-section">
@@ -179,23 +148,29 @@ const Home = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="cta-section">
-        <div className="cta-content">
-          <h2>¿Listo para mejorar tu tecnología?</h2>
-          <p>Únete a miles de clientes satisfechos y descubre por qué somos la tienda #1 en tecnología</p>
-          <div className="cta-buttons">
-            <Link to="/productos" className="btn-primary large">
-              Comenzar a Comprar
-            </Link>
-            <Link to="/contacto" className="btn-secondary large">
-              Contactar Asesor
-            </Link>
-          </div>
-        </div>
-      </section>
+   <section className="cta-section">
+  <div className="cta-content">
+    <h2>¿Listo para mejorar tu tecnología?</h2>
+    <p>Únete a miles de clientes satisfechos y descubre por qué somos la tienda #1 en tecnología</p>
+    <div className="cta-buttons">
+      <Link to="/productos" className="btn-primary large">
+        Comenzar a Comprar
+      </Link>
+      <a
+        href="https://wa.me/5492235123456?text=Hola!%20Quisiera%20hablar%20con%20un%20asesor."
+        target="_blank"
+        rel="noopener noreferrer"
+        className="btn-secondary large"
+      >
+        Contactar Asesor
+      </a>
+    </div>
+  </div>
+</section>
+
 
       {/* Newsletter */}
-      <section className="newsletter-section">
+      {/* <section className="newsletter-section">
         <div className="newsletter-content">
           <h3>📧 Mantente Informado</h3>
           <p>Recibe las últimas ofertas y novedades tecnológicas en tu email</p>
@@ -211,7 +186,7 @@ const Home = () => {
           </div>
           <small>Sin spam, puedes cancelar en cualquier momento</small>
         </div>
-      </section>
+      </section> */}
     </div>
   );
 };
